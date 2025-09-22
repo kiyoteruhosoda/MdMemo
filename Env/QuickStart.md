@@ -26,6 +26,7 @@ FROM ubuntu:22.04
 # 基本ツール
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     curl ca-certificates gnupg lsb-release \
+    git openssh-client \
     python3 python3-venv python3-pip \
     openjdk-21-jdk \
  && rm -rf /var/lib/apt/lists/*
@@ -65,7 +66,7 @@ mkdir -p .devcontainer
 cat <<'JSON' > .devcontainer/devcontainer.json
 {
   "name": "python-dev",
-  "build": { "dockerfile": "Dockerfile" },
+  "build": { "dockerfile": "../Dockerfile" },
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
   "workspaceFolder": "/workspace",
   "customizations": {
@@ -111,6 +112,52 @@ EOF
 
 ```
 
+
+VsCodeから
+`$prj.code-workspace`
+をひらく
+
+Dockerが有効でない場合は、VsCodeの「Reopen in Container」のプロンプトか以下のコマンドでOpen
+``` VsCode
+Dev Containers: Install devcontainer CLI
+```
+
+```
+devcontainer open .
+```
+
+
+Terminalで
+```bash
+git clone https://XXXXXXXX
+
+# Git使う場合
+git config --global user.name "あなたの名前"
+git config --global user.email "you@example.com"
+
+# お好みで（推奨）
+git config --global init.defaultBranch main
+git config --global pull.rebase false
+git config --global core.autocrlf false
+```
+
+
+
+
+## Dockerfileを修正した場合
+
+コマンドパレット →
+「Dev Containers: Rebuild and Reopen in Container」 を選ぶ。
+
+
+
+
+
+## その他コマンド
+
+
+
+
 起動
 
 ```bash
@@ -142,3 +189,4 @@ VSCode で $prj.code-workspaceを開く
 >docker stop "$prj"
 >docker rm "$prj"
 >```
+
