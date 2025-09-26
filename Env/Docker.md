@@ -257,6 +257,12 @@ docker load -i my-snapshot.tar
 > 似たコマンド：`docker export` は **コンテナのファイルシステム**のみを書き出し、メタデータ（履歴・環境変数・CMD など）は含まれません。
 > 配布・再利用には通常 `commit` → `save`/`load` が無難です。
 
+## ビルドして配布物作成
+
+```bash
+docker build -t myapp:latest . && docker save myapp:latest -o myapp-latest.tar
+```
+
 
 ## 実行中コンテナのシェルに入る
 
@@ -559,4 +565,5 @@ docker exec -it test bash  # 別のシェルから exec
 * **コミュニティ提供イメージ**
   `username/repo:tag` の形（例: `bitnami/mysql:8`）。公式に無い拡張機能入りのものもある。
   → 利用時は Docker Hub のページをよく確認して信頼できるか判断する。
+
 
