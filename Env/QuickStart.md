@@ -65,7 +65,7 @@ mkdir -p .devcontainer
 cat <<'JSON' > .devcontainer/devcontainer.json
 {
   "name": "python-dev",
-  "build": { "dockerfile": "Dockerfile" },
+  "build": { "dockerfile": "../Dockerfile" },
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
   "workspaceFolder": "/workspace",
   "customizations": {
